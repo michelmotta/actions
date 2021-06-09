@@ -11,6 +11,10 @@ on:
       - '**'
       - '!documentacao'
 
+defaults:
+  run:
+    working-directory: api
+
 jobs:
 
   build:
