@@ -15,7 +15,7 @@ describe('Endpoints CRUD de tags', () => {
       });
 
     expect(response.status).toBe(200);
-    expect(response.body.text).toBe('Teste 100');
+    expect(response.body.text).toBe('Teste 1');
 
     testId = response.body.id;
 
@@ -27,7 +27,7 @@ describe('Endpoints CRUD de tags', () => {
       .get(`/tag/${testId}`);
 
     expect(response.status).toBe(200);
-    expect(response.body.text).toBe('Teste 1');
+    expect(response.body.text).toBe('Teste 100');
 
     done();
   });
