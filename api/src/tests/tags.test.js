@@ -27,7 +27,7 @@ describe('Endpoints CRUD de tags', () => {
       .get(`/tag/${testId}`);
 
     expect(response.status).toBe(200);
-    expect(response.body.text).toBe('Teste 100');
+    expect(response.body.text).toBe('Teste 1');
 
     done();
   });
