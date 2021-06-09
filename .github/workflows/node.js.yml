@@ -1,0 +1,51 @@
+name: Jest + SonarCloud - NodeJS CI
+
+on:
+  push:
+    branches: 
+      - '**'        # todas as branches
+      - '!documentacao'   # exceto documentacao
+  pull_request:
+    branches: 
+      - '**'        # todas as branches
+      - '!documentacao'   # exceto documentacao
+defaults:
+  run:
+    working-directory: api
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        node-version: [14.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }} 
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Create Database
+      run: npx sequelize db:create
+    
+    - name: Migrate Database
+      run: npx sequelize db:migrate
+      
+    - name: Connect to PostgreSQL
+      run: node client.js
+      env:
+        POSTGRES_HOST: db
+        POSTGRES_PORT: 5432
+        
+    - name: Build
+      run: npm run build --if-present
+      
+    - name: Run Tests
+      run: npm test
