@@ -38,7 +38,7 @@
     "collectCoverage": true,
     "testResultsProcessor": "jest-sonar-reporter",
     "coveragePathIgnorePatterns": [
-      "/node_modules/", "src/config", "src/database", "src/models", "src/tests"
+      "/node_modules/"
     ]
   },
   "jestSonar": {
